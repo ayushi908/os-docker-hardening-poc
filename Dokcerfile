@@ -1,0 +1,20 @@
+# Minimal base image
+FROM alpine:3.19
+
+# Create non-root user
+RUN adduser -D appuser
+
+# Set working dir
+WORKDIR /app
+
+# Copy app
+COPY app/app.sh .
+
+# Give permissions
+RUN chmod +x app.sh
+
+# Switch to non-root
+USER appuser
+
+# Run app
+CMD ["sh", "app.sh"]
